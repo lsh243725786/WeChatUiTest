@@ -48,11 +48,33 @@ public class WebTest {
         basePage_01.run(uiAuto_02);
     }
 
-//    /**
-//     * 创建一个同名的方法，对应@MethodSource的要求
-//     * 实现对参数化数据的供应-单个参数化文件读取
-//     * @return
-//     */
+
+    /**
+     * PO loadPages批量执行用例
+     * @return
+     */
+    static List<Arguments> classic(){
+        basePage_01 = UiAutoFactory_04.create("web");
+        basePage_01.loadPages("src/main/resources/wechatuitest");
+        List<Arguments> all= new ArrayList<Arguments>();
+
+        Arrays.asList(
+//                "/wechatuitest/webuiauto_01.yaml",
+//                "/wechatuitest/webuiauto_02.yaml",
+                "/wechatuitest/webuiauto_03.yaml"
+        ).stream().forEach(path->{
+            UiAuto_02 uiAuto= basePage_01.load(path);
+            uiAuto.description=path;
+            all.add(arguments(uiAuto, path));
+        });
+        return all;
+    }
+
+    /**
+     * 创建一个同名的方法，对应@MethodSource的要求
+     * 实现对参数化数据的供应-单个参数化文件读取
+     * @return
+     */
 //    static Stream<UiAuto_02> classic(){
 //        //basePage_01加载的时候，给一个默认的"web"，后面会根据参数化的文件来确认是web还是其他
 //        basePage_01 = UiAutoFactory.create("web");
@@ -68,24 +90,25 @@ public class WebTest {
      * 实现对参数化数据的供应
      * @return
      */
-    static List<Arguments> classic(){
-        //basePage_01加载的时候，给一个默认的"web"，后面会根据参数化的文件来确认是web还是其他
-        basePage_01 = UiAutoFactory_04.create("web");
-        //创建一个列表，初始化一个all对象，用来继承和接收
-        List<Arguments> all  = new ArrayList<>();
-        //创建一个Arrays.asList存放所有资源路径，
-        // .stream().forEach(path->()流式读取资源路径,再用load接收资源路径
-        Arrays.asList(
-                "/wechatuitest/webuiauto.yaml",
-                "/wechatuitest/webuiauto_01.yaml",
-                "/wechatuitest/webuiauto_02.yaml"
-        ).stream().forEach(path->{
-            UiAuto_02 uiAuto_02 = basePage_01.load(path);
-            uiAuto_02.description=path;
-            //读出来的每个对象，add添加到all列表里
-            all.add(arguments(uiAuto_02, path));
-        });
-        //返回一个Stream的流式对象：all
-        return all;
-    }
+//    static List<Arguments> classic(){
+//        //basePage_01加载的时候，给一个默认的"web"，后面会根据参数化的文件来确认是web还是其他
+//        basePage_01 = UiAutoFactory_04.create("web");
+//        //创建一个列表，初始化一个all对象，用来继承和接收
+//        List<Arguments> all  = new ArrayList<>();
+//        //创建一个Arrays.asList存放所有资源路径，
+//        // .stream().forEach(path->()流式读取资源路径,再用load接收资源路径
+//        Arrays.asList(
+////                "/wechatuitest/webuiauto.yaml",
+////                "/wechatuitest/webuiauto_01.yaml",
+////                "/wechatuitest/webuiauto_02.yaml",
+//                "/wechatuitest/webuiauto_03.yaml"
+//        ).stream().forEach(path->{
+//            UiAuto_02 uiAuto_02 = basePage_01.load(path);
+//            uiAuto_02.description=path;
+//            //读出来的每个对象，add添加到all列表里
+//            all.add(arguments(uiAuto_02, path));
+//        });
+//        //返回一个Stream的流式对象：all
+//        return all;
+//    }
 }

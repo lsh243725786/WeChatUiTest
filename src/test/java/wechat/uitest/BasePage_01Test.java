@@ -36,6 +36,16 @@ class BasePage_01Test {
         basePage_01.run(uiAuto_02);
     }
 
+    @Test
+    void runPOM(){
+        //加载目录下的所有_page.yaml文件
+        basePage_01.loadPages("src/main/resources/wechatuitest");
+        //加载单个文件
+        UiAuto_02 uiauto=basePage_01.load("/wechatuitest/webuiauto_03.yaml");
+        basePage_01.run(uiauto);
+
+    }
+
     /**
      * 第二步，编写load测试方法
      * 首先load一个资源，再用ObjectMapper拿到资源代表的类

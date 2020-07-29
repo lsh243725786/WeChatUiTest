@@ -84,8 +84,8 @@ public class WebBasePage_03 extends BasePage_01 {
      * @param map
      */
     @Override
-    public void sendKey(HashMap<String, Object> map) {
-        super.sendKey(map);
+    public void sendKeys(HashMap<String, Object> map) {
+        super.sendKeys(map);
         if(map.containsKey("sendKeys")) {
             if (map.containsKey("id".toLowerCase())) {
                 sendKeys(By.id(map.get("id").toString()),map.get("sendKeys").toString());
